@@ -1,13 +1,13 @@
-# Privado ID JS SDK
+# Privado ID Optimism JS SDK
 
-SDK to work with Privado ID using JavaScript and TypeScript languages.
+SDK to work with Privado ID using JavaScript and TypeScript languages in Optimism
 
 ## Usage
 
 Installation:
 
 ```bash
-npm install @0xpolygonid/js-sdk
+npm install @wakeuplabs/opid-sdk
 ```
 
 ## Circuits
@@ -41,7 +41,7 @@ export RHS_CONTRACT_ADDRESS="reverse hash service contract address"
 
 ## Examples
 
-Please see [examples](https://github.com/0xPolygonID/js-sdk-examples) for visit examples information.
+Please see [examples](https://github.com/wakeuplabs-io/privadoid-js-sdk-examples) for visit examples information.
 
 ## Documentation
 
