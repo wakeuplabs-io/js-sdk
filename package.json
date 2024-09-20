@@ -1,7 +1,7 @@
 {
-  "name": "@0xpolygonid/js-sdk",
+  "name": "@wakeuplabs/opid-sdk",
   "version": "1.20.1",
-  "description": "SDK to work with Polygon ID",
+  "description": "SDK to work with Optimism ID",
   "main": "dist/node/cjs/index.js",
   "module": "dist/node/esm/index.js",
   "exports": {
@@ -41,14 +41,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/0xPolygonID/js-sdk.git"
+    "url": "https://github.com/wakeuplabs-io/js-sdk"
   },
   "author": "",
   "license": "MIT or Apache-2.0",
   "bugs": {
-    "url": "https://github.com/0xPolygonID/js-sdk/issues"
+    "url": "https://github.com/wakeuplabs-io/js-sdk/issues"
   },
-  "homepage": "https://github.com/0xPolygonID/js-sdk#readme",
+  "homepage": "https://github.com/wakeuplabs-io/js-sdk#readme",
   "devDependencies": {
     "@cspell/eslint-plugin": "^8.14.2",
     "@gr2m/fetch-mock": "9.11.0-pull-request-644.1",
