@@ -1,4 +1,3 @@
-import './opid/register';
 export * from './identity';
 export * from './credentials';
 export * from './kms';
@@ -11,8 +10,9 @@ export * from './circuits';
 export * from './iden3comm';
 export * from './utils';
 export * from './blockchain';
-export * from './opid/register';
 import * as core from '@iden3/js-iden3-core';
 import * as jsonLDMerklizer from '@iden3/js-jsonld-merklization';
+import './opid/register';
+export * from './opid/register';
 export { core };
 export { jsonLDMerklizer };
