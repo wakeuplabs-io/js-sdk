@@ -1,4 +1,4 @@
-import { core } from "..";
+import * as core from '@iden3/js-iden3-core';
 
 export const OPID_METHOD = 'opid';
 
