@@ -91,7 +91,19 @@ export class OnChainRevocationStorage {
       ? BigInt(this._config.maxPriorityFeePerGas)
       : feeData.maxPriorityFeePerGas;
 
-    const gasLimit = await this._contract.saveNodes.estimateGas(payload);
+    let gasLimit = BigInt(300000);
+    try {
+      gasLimit = await this._contract.saveNodes.estimateGas(payload);
+    } catch (e) {
+      const errMsg =
+        (e as { error: { message: string } })?.error?.message ??
+        (e as Error).message ??
+        (e as string);
+      if (!errMsg.includes('exceeds block gas limit')) throw e;
+      
+      console.log('estimation failed, using fallback gasLimit: 300000');
+    }
+
     const txData = await this._contract.saveNodes.populateTransaction(payload);
 
     const request: TransactionRequest = {
@@ -102,11 +114,26 @@ export class OnChainRevocationStorage {
       maxPriorityFeePerGas
     };
 
-    const { txnReceipt } = await this._transactionService.sendTransactionRequest(
-      this._signer,
-      request
-    );
-    return txnReceipt;
+    let receipt: TransactionReceipt;
+    try {
+      receipt = (await this._transactionService.sendTransactionRequest(this._signer, request))
+        .txnReceipt;
+    } catch (e) {
+      const errMsg =
+        (e as { error: { message: string } })?.error?.message ??
+        (e as Error).message ??
+        (e as string);
+      if (!errMsg.includes('exceeds block gas limit')) throw e;
+      request.nonce = (request.nonce ?? 0) + 1;
+      request.gasLimit = gasLimit * BigInt(30);
+      request.maxFeePerGas = maxFeePerGas ? maxFeePerGas * BigInt(30) : null;
+      request.maxPriorityFeePerGas = maxPriorityFeePerGas
+        ? maxPriorityFeePerGas * BigInt(30)
+        : null;
+      receipt = (await this._transactionService.sendTransactionRequest(this._signer, request))
+        .txnReceipt;
+    }
+    return receipt;
   }
 
   private static convertIssuerInfo(issuer: bigint[]): Issuer {
