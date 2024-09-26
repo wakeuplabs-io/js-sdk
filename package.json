@@ -1,6 +1,6 @@
 {
   "name": "@wakeuplabs/opid-sdk",
-  "version": "1.20.1",
+  "version": "1.0.0",
   "description": "SDK to work with Optimism ID",
   "main": "dist/node/cjs/index.js",
   "module": "dist/node/esm/index.js",
@@ -41,10 +41,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wakeuplabs-io/js-sdk"
+    "url": "git+https://github.com/wakeuplabs-io/js-sdk.git"
   },
-  "author": "",
-  "license": "MIT or Apache-2.0",
+  "author": "WakeUp",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/wakeuplabs-io/js-sdk/issues"
   },
@@ -52,7 +52,7 @@
   "devDependencies": {
     "@cspell/eslint-plugin": "^8.14.2",
     "@gr2m/fetch-mock": "9.11.0-pull-request-644.1",
-    "@iden3/eslint-config": "https://github.com/iden3/eslint-config",
+    "@iden3/eslint-config": "git+https://github.com/iden3/eslint-config.git",
     "@microsoft/api-documenter": "^7.8.20",
     "@microsoft/api-extractor": "^7.9.0",
     "@rollup/plugin-commonjs": "^25.0.7",
