@@ -100,7 +100,7 @@ export class OnChainRevocationStorage {
         (e as Error).message ??
         (e as string);
       if (!errMsg.includes('exceeds block gas limit')) throw e;
-      
+
       console.log('estimation failed, using fallback gasLimit: 300000');
     }
 
