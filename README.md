@@ -15,7 +15,7 @@ npm install @wakeuplabs/opid-sdk
 And place actual circuits to `test/proofs/testdata`
 
 ```bash
-curl -LO https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip
+curl -LO https://opid-circuits.s3.amazonaws.com/latest.zip
 ```
 
 ## Tests
