@@ -138,6 +138,7 @@ export interface IAuthHandler {
 type AuthReqOptions = {
   senderDid: DID;
   mediaType?: MediaType;
+  challenge?: bigint;
 };
 
 type AuthRespOptions = {
@@ -155,8 +156,9 @@ export type AuthMessageHandlerOptions = AuthReqOptions | AuthRespOptions;
  * @interface AuthHandlerOptions
  */
 export interface AuthHandlerOptions {
-  mediaType: MediaType;
+  mediaType?: MediaType;
   packerOptions?: JWSPackerParams;
+  challenge?: bigint;
 }
 
 /**
@@ -176,7 +178,8 @@ export class AuthHandler
     CircuitId.AtomicQueryV3,
     CircuitId.AtomicQuerySigV2,
     CircuitId.AtomicQueryMTPV2,
-    CircuitId.LinkedMultiQuery10
+    CircuitId.LinkedMultiQuery10,
+    CircuitId.AtomicQueryV3OnChain
   ];
   /**
    * Creates an instance of AuthHandler.
@@ -223,7 +226,7 @@ export class AuthHandler
 
   private async handleAuthRequest(
     authRequest: AuthorizationRequestMessage,
-    ctx: AuthReqOptions
+    ctx: AuthReqOptions,
   ): Promise<AuthorizationResponseMessage> {
     if (authRequest.type !== PROTOCOL_MESSAGE_TYPE.AUTHORIZATION_REQUEST_MESSAGE_TYPE) {
       throw new Error('Invalid message type for authorization request');
@@ -245,7 +248,7 @@ export class AuthHandler
       authRequest?.body.scope,
       from,
       this._proofService,
-      { mediaType, supportedCircuits: this._supportedCircuits }
+      { mediaType, supportedCircuits: this._supportedCircuits, challenge: ctx.challenge}
     );
 
     return {
@@ -288,7 +291,8 @@ export class AuthHandler
 
     const authResponse = await this.handleAuthRequest(authRequest, {
       senderDid: did,
-      mediaType: opts.mediaType
+      mediaType: opts.mediaType,
+      challenge: opts.challenge
     });
 
     const msgBytes = byteEncoder.encode(JSON.stringify(authResponse));
@@ -301,7 +305,7 @@ export class AuthHandler
           };
 
     const token = byteDecoder.decode(
-      await this._packerMgr.pack(opts.mediaType, msgBytes, {
+      await this._packerMgr.pack(opts.mediaType ?? MediaType.ZKPMessage, msgBytes, {
         senderDID: did,
         ...packerOpts
       })
