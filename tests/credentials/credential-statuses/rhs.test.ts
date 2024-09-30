@@ -1,6 +1,15 @@
 import { InMemoryDataSource } from '../../../src/storage/memory/data-source';
 import { CredentialStorage } from '../../../src/storage/shared/credential-storage';
-import { Identity, IdentityStorage, IdentityWallet, Profile, byteEncoder } from '../../../src';
+import {
+  Identity,
+  IdentityStorage,
+  IdentityWallet,
+  OPID_BLOCKCHAIN,
+  OPID_METHOD,
+  OPID_NETWORK_SEPOLIA,
+  Profile,
+  byteEncoder
+} from '../../../src';
 import { BjjProvider, KMS, KmsKeyType } from '../../../src/kms';
 import { InMemoryPrivateKeyStore } from '../../../src/kms/store';
 import { IDataStorage, IStateStorage } from '../../../src/storage/interfaces';
@@ -16,7 +25,6 @@ import {
 } from '../../../src/verifiable';
 import { Proof } from '@iden3/js-merkletree';
 import { RootInfo, StateProof } from '../../../src/storage/entities/state';
-import { Blockchain, DidMethod, NetworkId } from '@iden3/js-iden3-core';
 import { expect } from 'chai';
 import { RHSResolver } from '../../../src/credentials';
 import { CredentialStatusResolverRegistry } from '../../../src/credentials';
@@ -204,9 +212,9 @@ describe('rhs', () => {
   it('genesis reject : backup is called', async () => {
     const seedPhraseIssuer: Uint8Array = byteEncoder.encode('seedseedseedseedseedseedseedseed');
     const { did: issuerDID, credential: issuerAuthCredential } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhraseIssuer,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,

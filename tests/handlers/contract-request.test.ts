@@ -10,7 +10,11 @@ import {
   EthStateStorage,
   OnChainZKPVerifier,
   defaultEthConnectionConfig,
-  hexToBytes
+  hexToBytes,
+  OPID_METHOD,
+  OPID_BLOCKCHAIN,
+  OPID_NETWORK_SEPOLIA,
+  OPID_CHAIN_ID_SEPOLIA
 } from '../../src';
 import { IDataStorage, IStateStorage, IOnChainZKPVerifier } from '../../src/storage/interfaces';
 import { InMemoryDataSource, InMemoryMerkleTreeStorage } from '../../src/storage/memory';
@@ -48,7 +52,7 @@ import {
 import { proving } from '@iden3/js-jwz';
 import * as uuid from 'uuid';
 import { MediaType, PROTOCOL_MESSAGE_TYPE } from '../../src/iden3comm/constants';
-import { Blockchain, BytesHelper, DidMethod, NetworkId } from '@iden3/js-iden3-core';
+import { BytesHelper } from '@iden3/js-iden3-core';
 import { expect } from 'chai';
 import { CredentialStatusResolverRegistry } from '../../src/credentials';
 import { RHSResolver } from '../../src/credentials';
@@ -65,7 +69,7 @@ describe('contract-request', () => {
   let packageMgr: IPackageManager;
   const rhsUrl = process.env.RHS_URL as string;
   const rpcUrl = process.env.RPC_URL as string;
-  const ipfsNodeURL = process.env.IPFS_URL as string;
+  const ipfsGatewayURL = process.env.IPFS_URL as string;
   const walletKey = process.env.WALLET_KEY as string;
 
   const seedPhraseIssuer: Uint8Array = byteEncoder.encode('seedseedseedseedseedseedseedseed');
@@ -209,7 +213,7 @@ describe('contract-request', () => {
     idWallet = new IdentityWallet(kms, dataStorage, credWallet);
 
     proofService = new ProofService(idWallet, credWallet, circuitStorage, mockStateStorage, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
     packageMgr = await getPackageMgr(
       await circuitStorage.loadCircuitData(CircuitId.AuthV2),
@@ -221,9 +225,9 @@ describe('contract-request', () => {
 
   it('contract request flow', async () => {
     const { did: userDID, credential: cred } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhrase,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -234,9 +238,9 @@ describe('contract-request', () => {
     expect(cred).not.to.be.undefined;
 
     const { did: issuerDID, credential: issuerAuthCredential } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhraseIssuer,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -323,7 +327,7 @@ describe('contract-request', () => {
     const stateEthConfig = defaultEthConnectionConfig;
     stateEthConfig.url = rpcUrl;
     stateEthConfig.contractAddress = '0x1a4cC30f2aA0377b0c3bc9848766D90cb4404124';
-    stateEthConfig.chainId = 80002;
+    stateEthConfig.chainId = OPID_CHAIN_ID_SEPOLIA;
 
     const kms = registerKeyProvidersInMemoryKMS();
     dataStorage = {
@@ -348,7 +352,7 @@ describe('contract-request', () => {
     idWallet = new IdentityWallet(kms, dataStorage, credWallet);
 
     proofService = new ProofService(idWallet, credWallet, circuitStorage, dataStorage.states, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
     packageMgr = await getPackageMgr(
       await circuitStorage.loadCircuitData(CircuitId.AuthV2),
@@ -357,9 +361,9 @@ describe('contract-request', () => {
     );
 
     const { did: userDID, credential: cred } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhrase,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -370,9 +374,9 @@ describe('contract-request', () => {
     expect(cred).not.to.be.undefined;
 
     const { did: issuerDID, credential: issuerAuthCredential } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhraseIssuer,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -421,7 +425,7 @@ describe('contract-request', () => {
     const conf = defaultEthConnectionConfig;
     conf.contractAddress = contractAddress;
     conf.url = rpcUrl;
-    conf.chainId = 80002;
+    conf.chainId = OPID_CHAIN_ID_SEPOLIA;
 
     const zkpVerifier = new OnChainZKPVerifier([conf]);
     contractRequestHandler = new ContractRequestHandler(packageMgr, proofService, zkpVerifier);
@@ -499,7 +503,7 @@ describe('contract-request', () => {
     idWallet = new IdentityWallet(kms, dataStorage, credWallet);
 
     proofService = new ProofService(idWallet, credWallet, circuitStorage, dataStorage.states, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
     packageMgr = await getPackageMgr(
       await circuitStorage.loadCircuitData(CircuitId.AuthV2),
@@ -508,9 +512,9 @@ describe('contract-request', () => {
     );
 
     const { did: userDID, credential: cred } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhrase,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -521,9 +525,9 @@ describe('contract-request', () => {
     expect(cred).not.to.be.undefined;
 
     const { did: issuerDID, credential: issuerAuthCredential } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhraseIssuer,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -590,11 +594,11 @@ describe('contract-request', () => {
     ];
 
     const erc20Verifier = '0xc5Cd536cb9Cc3BD24829502A39BE593354986dc4';
-    const verifierDid = 'did:polygonid:polygon:amoy:2qQ68JkRcf3ymy9wtzKyY3Dajst9c6cHCDZyx7NrTz';
+    const verifierDid = 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy';
     const conf = defaultEthConnectionConfig;
     conf.contractAddress = erc20Verifier;
     conf.url = rpcUrl;
-    conf.chainId = 80002;
+    conf.chainId = OPID_CHAIN_ID_SEPOLIA;
 
     const zkpVerifier = new OnChainZKPVerifier([conf]);
     contractRequestHandler = new ContractRequestHandler(packageMgr, proofService, zkpVerifier);
@@ -679,7 +683,7 @@ describe('contract-request', () => {
     idWallet = new IdentityWallet(kms, dataStorage, credWallet);
 
     proofService = new ProofService(idWallet, credWallet, circuitStorage, dataStorage.states, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
     packageMgr = await getPackageMgr(
       await circuitStorage.loadCircuitData(CircuitId.AuthV2),
@@ -688,9 +692,9 @@ describe('contract-request', () => {
     );
 
     const { did: userDID, credential: cred } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Privado,
-      networkId: NetworkId.Main,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhrase,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -701,9 +705,9 @@ describe('contract-request', () => {
     expect(cred).not.to.be.undefined;
 
     const { did: issuerDID, credential: issuerAuthCredential } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Privado,
-      networkId: NetworkId.Test,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhraseIssuer,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -753,7 +757,7 @@ describe('contract-request', () => {
     const conf = defaultEthConnectionConfig;
     conf.contractAddress = erc20Verifier;
     conf.url = amoyVerifierRpcUrl;
-    conf.chainId = 80002; // amoy chain id
+    conf.chainId = OPID_CHAIN_ID_SEPOLIA;
 
     const zkpVerifier = new OnChainZKPVerifier([conf], {
       didResolverUrl: 'https://resolver-dev.privado.id'
@@ -866,9 +870,9 @@ describe('contract-request', () => {
     );
 
     const { did: userDID, credential: cred } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Privado,
-      networkId: NetworkId.Main,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhrase,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -879,9 +883,9 @@ describe('contract-request', () => {
     expect(cred).not.to.be.undefined;
 
     const { did: issuerDID, credential: issuerAuthCredential } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Privado,
-      networkId: NetworkId.Test,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhraseIssuer,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -952,7 +956,7 @@ describe('contract-request', () => {
       chain_id: amoyStateEthConfig.chainId
     };
 
-    const verifierDid = 'did:iden3:polygon:amoy:x6x5sor7zpy1YGS4yjcmnzQSC7FZC7q7DPgNMT79q';
+    const verifierDid = 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy';
 
     const ciRequestBody: ContractInvokeRequestBody = {
       reason: 'reason',

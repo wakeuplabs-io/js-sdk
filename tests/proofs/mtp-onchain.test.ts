@@ -5,6 +5,9 @@ import {
   Identity,
   IdentityStorage,
   IdentityWallet,
+  OPID_BLOCKCHAIN,
+  OPID_METHOD,
+  OPID_NETWORK_SEPOLIA,
   Profile,
   byteEncoder
 } from '../../src';
@@ -25,7 +28,6 @@ import { RootInfo, StateProof } from '../../src/storage/entities/state';
 import path from 'path';
 import { CredentialStatusType, VerifiableConstants, W3CCredential } from '../../src/verifiable';
 import { ZeroKnowledgeProofRequest } from '../../src/iden3comm';
-import { Blockchain, DidMethod, NetworkId } from '@iden3/js-iden3-core';
 import { expect } from 'chai';
 import { RPC_URL } from '../helpers';
 
@@ -137,9 +139,9 @@ describe('mtp onchain proofs', () => {
     const seedPhrase: Uint8Array = byteEncoder.encode('seedseedseedseedseedseedseeduser');
 
     const { did: userDID } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhrase,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -148,9 +150,9 @@ describe('mtp onchain proofs', () => {
     });
 
     const { did: issuerDID, credential: issuerAuthCredential } = await idWallet.createIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: seedPhraseIssuer,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,

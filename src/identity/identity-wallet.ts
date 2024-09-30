@@ -59,6 +59,7 @@ import {
 } from '../credentials/status/credential-status-publisher';
 import { InputGenerator, IZKProver } from '../proof';
 import { ITransactionService, TransactionService } from '../blockchain';
+import { OPID_BLOCKCHAIN, OPID_METHOD, OPID_NETWORK_SEPOLIA } from '../opid/register';
 
 /**
  * DID creation options
@@ -140,7 +141,7 @@ export interface IIdentityWallet {
    * adds auth BJJ credential to claims tree and generates mtp of inclusion
    * based on the resulting state it provides an identifier in DID form.
    *
-   * @param {IdentityCreationOptions} opts - default is did:iden3:polygon:amoy** with generated key.
+   * @param {IdentityCreationOptions} opts - default is did:opid:optimism:sepolia** with generated key.
    * @returns `Promise<{ did: DID; credential: W3CCredential }>` - returns did and Auth BJJ credential
    * @public
    */
@@ -157,7 +158,7 @@ export interface IIdentityWallet {
   /**
    * Create Identity based in Ethereum address and it provides an identifier in DID form.
    *
-   * @param {IdentityCreationOptions} opts - default is did:iden3:polygon:amoy** with generated key.
+   * @param {IdentityCreationOptions} opts - default is did:opid:optimism:sepolia** with generated key.
    * @returns `Promise<{ did: DID; credential: W3CCredential | undefined }>` - returns did and Auth BJJ credential
    * @public
    */
@@ -628,9 +629,9 @@ export class IdentityWallet implements IIdentityWallet {
     const currentState = hashElems([ctr.bigInt(), ZERO_HASH.bigInt(), ZERO_HASH.bigInt()]);
 
     const didType = buildDIDType(
-      opts.method || DidMethod.Iden3,
-      opts.blockchain || Blockchain.Polygon,
-      opts.networkId || NetworkId.Amoy
+      opts.method || OPID_METHOD,
+      opts.blockchain || OPID_BLOCKCHAIN,
+      opts.networkId || OPID_NETWORK_SEPOLIA
     );
     const identifier = Id.idGenesisFromIdenState(didType, currentState.bigInt());
     const did = DID.parseFromId(identifier);

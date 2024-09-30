@@ -60,16 +60,16 @@ const didExampleRecovery = {
     'https://www.w3.org/ns/did/v1',
     'https://w3id.org/security/suites/secp256k1recovery-2020/v2'
   ],
-  id: 'did:iden3:privado:main:2SZDsdYordSH49VhS6hGo164RLwfcQe9FGow5ftSUG',
+  id: 'did:opid:optimism:sepolia:46wEFsLG5vRoSPFGJQdqhUSNfCtvahnrsm8MoPgokY',
   verificationMethod: [
     {
-      id: 'did:iden3:privado:main:2SZDsdYordSH49VhS6hGo164RLwfcQe9FGow5ftSUG#vm-1',
-      controller: 'did:iden3:privado:main:2SZDsdYordSH49VhS6hGo164RLwfcQe9FGow5ftSUG',
+      id: 'did:opid:optimism:sepolia:46wEFsLG5vRoSPFGJQdqhUSNfCtvahnrsm8MoPgokY',
+      controller: 'did:opid:optimism:sepolia:46wEFsLG5vRoSPFGJQdqhUSNfCtvahnrsm8MoPgokY',
       type: 'EcdsaSecp256k1RecoveryMethod2020',
-      blockchainAccountId: 'eip155:21000:0x964e496a1b2541ed029abd5e49fd01e41cd02995'
+      blockchainAccountId: 'eip155:11155420:0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266'
     }
   ],
-  authentication: ['did:iden3:privado:main:2SZDsdYordSH49VhS6hGo164RLwfcQe9FGow5ftSUG#vm-1']
+  authentication: ['did:opid:optimism:sepolia:46wEFsLG5vRoSPFGJQdqhUSNfCtvahnrsm8MoPgokY']
 };
 
 describe('jws packer tests', () => {
@@ -118,7 +118,7 @@ describe('jws packer tests', () => {
       resolve: () => Promise.resolve({ didDocument: didExampleRecovery } as DIDResolutionResult)
     };
     const recoveryPacker = new JWSPacker(kms, recoveryDIDDocument);
-    const ethDidString = 'did:iden3:privado:main:2SZDsdYordSH49VhS6hGo164RLwfcQe9FGow5ftSUG';
+    const ethDidString = 'did:opid:optimism:sepolia:46wEFsLG5vRoSPFGJQdqhUSNfCtvahnrsm8MoPgokY';
     const ethDidPk = '7365656473656564656565657365656473656564736565647365656475736572';
     const ethDid = DID.parse(ethDidString);
     if (isEthereumIdentity(ethDid)) {
@@ -146,7 +146,7 @@ describe('jws packer tests', () => {
   });
 
   it('returns EcdsaSecp256k1RecoveryMethod2020 VM from eth identity', async () => {
-    const ethDidString = 'did:iden3:privado:main:2SZDsdYordSH49VhS6hGo164RLwfcQe9FGow5ftSUG';
+    const ethDidString = 'did:opid:optimism:sepolia:46wEFsLG5vRoSPFGJQdqhUSNfCtvahnrsm8MoPgokY';
     const ethDid = DID.parse(ethDidString);
     if (isEthereumIdentity(ethDid)) {
       const id = DID.idFromDID(ethDid);

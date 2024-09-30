@@ -118,18 +118,18 @@
         console.log(wallet);
 
         const { did, credential } = await wallet.createIdentity({
-          method: core.DidMethod.Iden3,
-          blockchain: core.Blockchain.Polygon,
-          networkId: core.NetworkId.Amoy,
+          method: "opid",
+          blockchain: 'optimism',
+          networkId: 'sepolia',
           revocationOpts: {
             type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
             id: 'https://rhs-staging.polygonid.me'
           }
         });
         const { did: issuerDID, credential: issuerAuthCredential } = await wallet.createIdentity({
-          method: core.DidMethod.Iden3,
-          blockchain: core.Blockchain.Polygon,
-          networkId: core.NetworkId.Amoy,
+          method: "opid",
+          blockchain: 'optimism',
+          networkId: 'sepolia',
           revocationOpts: {
             type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
             id: 'https://rhs-staging.polygonid.me'

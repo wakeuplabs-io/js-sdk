@@ -5,6 +5,9 @@ import {
   Identity,
   IdentityStorage,
   IdentityWallet,
+  OPID_BLOCKCHAIN,
+  OPID_METHOD,
+  OPID_NETWORK_SEPOLIA,
   Profile
 } from '../../src';
 import { BjjProvider, KMS, KmsKeyType } from '../../src/kms';
@@ -19,7 +22,7 @@ import { RootInfo, StateProof } from '../../src/storage/entities/state';
 import path from 'path';
 import { byteEncoder } from '../../src';
 import { ZeroKnowledgeProofRequest } from '../../src/iden3comm';
-import { Blockchain, DID, DidMethod, NetworkId } from '@iden3/js-iden3-core';
+import { DID } from '@iden3/js-iden3-core';
 import { expect } from 'chai';
 import { CredentialStatusResolverRegistry } from '../../src/credentials';
 import { RHSResolver } from '../../src/credentials';
@@ -34,6 +37,7 @@ describe('sig proofs', () => {
   let proofService: ProofService;
   const rhsUrl = process.env.RHS_URL as string;
   const ipfsNodeURL = process.env.IPFS_URL as string;
+  const ipfsGatewayURL = process.env.IPFS_URL as string;
 
   let userDID: DID;
   let issuerDID: DID;
@@ -106,16 +110,16 @@ describe('sig proofs', () => {
     idWallet = new IdentityWallet(kms, dataStorage, credWallet);
 
     proofService = new ProofService(idWallet, credWallet, circuitStorage, mockStateStorage, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
 
     const seedPhraseIssuer: Uint8Array = byteEncoder.encode('seedseedseedseedseedseedseedseed');
     const seedPhrase: Uint8Array = byteEncoder.encode('seedseedseedseedseedseedseeduser');
 
     const opts = (seed: Uint8Array) => ({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -323,7 +327,7 @@ describe('sig proofs', () => {
           }
         ]
       },
-      from: 'did:polygonid:polygon:mumbai:2qLPqvayNQz9TA2r5VPxUugoF18teGU583zJ859wfy'
+      from: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy'
     };
 
     const claimReq: CredentialRequest = {
@@ -340,7 +344,7 @@ describe('sig proofs', () => {
       }
     };
     const issuerCred = await idWallet.issueCredential(issuerDID, claimReq, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
 
     await credWallet.save(issuerCred);
@@ -414,7 +418,7 @@ describe('sig proofs', () => {
       }
     };
     const issuedCred = await idWallet.issueCredential(issuerDID, claimReq, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
 
     await credWallet.save(issuedCred);
@@ -453,7 +457,7 @@ describe('sig proofs', () => {
     };
 
     const deliveryCred = await idWallet.issueCredential(issuerDID, deliveryClaimReq, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
 
     await credWallet.save(deliveryCred);
@@ -555,7 +559,7 @@ describe('sig proofs', () => {
           }
         ]
       },
-      from: 'did:polygonid:polygon:mumbai:2qLPqvayNQz9TA2r5VPxUugoF18teGU583zJ859wfy'
+      from: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy'
     };
 
     const claimReq: CredentialRequest = {
@@ -574,7 +578,7 @@ describe('sig proofs', () => {
       }
     };
     const issuerCred = await idWallet.issueCredential(issuerDID, claimReq, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
 
     await credWallet.save(issuerCred);
@@ -627,7 +631,7 @@ describe('sig proofs', () => {
           }
         ]
       },
-      from: 'did:polygonid:polygon:mumbai:2qLPqvayNQz9TA2r5VPxUugoF18teGU583zJ859wfy'
+      from: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy'
     };
 
     const claimReq: CredentialRequest = {
@@ -647,7 +651,7 @@ describe('sig proofs', () => {
       }
     };
     const issuerCred = await idWallet.issueCredential(issuerDID, claimReq, {
-      ipfsNodeURL
+      ipfsGatewayURL
     });
 
     await credWallet.save(issuerCred);

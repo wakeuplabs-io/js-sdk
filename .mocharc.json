@@ -3,7 +3,7 @@
         "ts"
     ],
     "spec": "tests/**/*.test.ts",
-    "require": "ts-node/register",
+    "require": ["ts-node/register", "./src/opid/register.ts"],
     "timeout": "300000",
     "maxDiffSize": "10000"
 }

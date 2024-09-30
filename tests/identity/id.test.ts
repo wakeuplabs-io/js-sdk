@@ -16,7 +16,10 @@ import {
   Iden3SparseMerkleTreeProof,
   BJJSignatureProof2021,
   TreeState,
-  IdentityCreationOptions
+  IdentityCreationOptions,
+  OPID_METHOD,
+  OPID_BLOCKCHAIN,
+  OPID_NETWORK_SEPOLIA
 } from '../../src';
 import {
   MOCK_STATE_STORAGE,
@@ -33,7 +36,6 @@ import {
 import { expect } from 'chai';
 import { Wallet } from 'ethers';
 import { getRandomBytes } from '@iden3/js-crypto';
-import { Blockchain, DidMethod, NetworkId } from '@iden3/js-iden3-core';
 import { ZERO_HASH } from '@iden3/js-merkletree';
 
 describe('identity', () => {
@@ -41,7 +43,7 @@ describe('identity', () => {
   let idWallet: IdentityWallet;
   let dataStorage: IDataStorage;
 
-  const expectedDID = 'did:iden3:polygon:amoy:xCRp75DgAdS63W65fmXHz6p9DwdonuRU9e46DifhX';
+  const expectedDID = 'did:opid:optimism:sepolia:472hz6bde6EFvFdNGgGKwKufVUHQXR79BE12FAnrt5';
 
   const createClaimReq = (
     credentialSubjectId: string,
@@ -98,7 +100,7 @@ describe('identity', () => {
 
     const profileDID = await idWallet.createProfile(did, 10, 'http://polygonissuer.com/');
     expect(profileDID.string()).to.equal(
-      'did:iden3:polygon:amoy:xHMd1mimHu3Gc1nhe3DXrimqUCNtgYP8gcuGAHgxm'
+      'did:opid:optimism:sepolia:4721KoBxT3hk3R9macFFH45BJjmWycM5X8xF5trU52'
     );
 
     const dbProfile = await dataStorage.identity.getProfileByVerifier('http://polygonissuer.com/');
@@ -183,7 +185,7 @@ describe('identity', () => {
     });
 
     expect(did.string()).to.equal(
-      'did:iden3:polygon:amoy:x6x5sor7zpxsu478u36QvEgaRUfPjmzqFo5PHHzbM'
+      'did:opid:optimism:sepolia:46wEFsLG5vRni7BPKuXu4G3XvfpS7MyiYLA3YEMrHz'
     );
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -208,15 +210,15 @@ describe('identity', () => {
     };
     // create identity without auth bjj credential
     const { did, credential } = await idWallet.createEthereumBasedIdentity({
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       ...authBJJCredentialCreationOptions,
       createBjjCredential: false
     });
 
     expect(did.string()).to.equal(
-      'did:iden3:polygon:amoy:x6x5sor7zpxsu478u36QvEgaRUfPjmzqFo5PHHzbM'
+      'did:opid:optimism:sepolia:46wEFsLG5vRni7BPKuXu4G3XvfpS7MyiYLA3YEMrHz'
     );
     expect(credential).to.be.undefined;
 
@@ -402,9 +404,9 @@ describe('identity', () => {
 
   it('replace auth bjj credential', async () => {
     const idRequest: IdentityCreationOptions = {
-      method: DidMethod.Iden3,
-      blockchain: Blockchain.Polygon,
-      networkId: NetworkId.Amoy,
+      method: OPID_METHOD,
+      blockchain: OPID_BLOCKCHAIN,
+      networkId: OPID_NETWORK_SEPOLIA,
       seed: SEED_ISSUER,
       revocationOpts: {
         type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
