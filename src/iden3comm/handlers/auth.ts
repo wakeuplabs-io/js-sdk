@@ -226,7 +226,7 @@ export class AuthHandler
 
   private async handleAuthRequest(
     authRequest: AuthorizationRequestMessage,
-    ctx: AuthReqOptions,
+    ctx: AuthReqOptions
   ): Promise<AuthorizationResponseMessage> {
     if (authRequest.type !== PROTOCOL_MESSAGE_TYPE.AUTHORIZATION_REQUEST_MESSAGE_TYPE) {
       throw new Error('Invalid message type for authorization request');
@@ -248,7 +248,7 @@ export class AuthHandler
       authRequest?.body.scope,
       from,
       this._proofService,
-      { mediaType, supportedCircuits: this._supportedCircuits, challenge: ctx.challenge}
+      { mediaType, supportedCircuits: this._supportedCircuits, challenge: ctx.challenge }
     );
 
     return {
