@@ -134,7 +134,7 @@ describe('payment-request handler', () => {
       type: PaymentRequestDataType.Iden3PaymentRequestCryptoV1,
       amount: '0.001',
       id: '12432',
-      chainId: '80002',
+      chainId: '11155420',
       address: '0x2C2007d72f533FfD409F0D9f515983e95bF14992',
       currency: SupportedCurrencies.ETH
     },

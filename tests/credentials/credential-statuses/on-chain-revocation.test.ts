@@ -49,13 +49,13 @@ describe('parse credential status with type Iden3OnchainSparseMerkleTreeProof202
     {
       name: 'extract information from credentialStatus.id',
       input: {
-        id: 'did:polygonid:polygon:amoy:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/credentialStatus?revocationNonce=1234&contractAddress=80002:0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy/credentialStatus?revocationNonce=1234&contractAddress=11155420:0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
         type: CredentialStatusType.Iden3OnchainSparseMerkleTreeProof2023,
         revocationNonce: 0
       },
       output: {
-        contractAddress: '0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
-        chainId: 80002,
+        contractAddress: '0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
+        chainId: 11155420,
         revocationNonce: 1234,
         stateHex: ''
       }
@@ -63,13 +63,13 @@ describe('parse credential status with type Iden3OnchainSparseMerkleTreeProof202
     {
       name: 'revocation nonce is 0 on id',
       input: {
-        id: 'did:polygonid:polygon:amoy:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/credentialStatus?revocationNonce=0&contractAddress=80002:0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy/credentialStatus?revocationNonce=0&contractAddress=11155420:0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
         type: CredentialStatusType.Iden3OnchainSparseMerkleTreeProof2023,
         revocationNonce: undefined
       },
       output: {
-        contractAddress: '0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
-        chainId: 80002,
+        contractAddress: '0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
+        chainId: 11155420,
         revocationNonce: 0,
         stateHex: ''
       }
@@ -77,13 +77,13 @@ describe('parse credential status with type Iden3OnchainSparseMerkleTreeProof202
     {
       name: 'revocation nonce is 0 on credentialStatus',
       input: {
-        id: 'did:polygonid:polygon:amoy:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/credentialStatus?contractAddress=80002:0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy/credentialStatus?contractAddress=11155420:0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
         type: CredentialStatusType.Iden3OnchainSparseMerkleTreeProof2023,
         revocationNonce: 0
       },
       output: {
-        contractAddress: '0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
-        chainId: 80002,
+        contractAddress: '0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
+        chainId: 11155420,
         revocationNonce: 0,
         stateHex: ''
       }
@@ -91,13 +91,13 @@ describe('parse credential status with type Iden3OnchainSparseMerkleTreeProof202
     {
       name: 'Parse stateHex from credentialStatus.id',
       input: {
-        id: 'did:polygonid:polygon:amoy:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/credentialStatus?contractAddress=80002:0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2&state=a1abdb9f44c7b649eb4d21b59ef34bd38e054aa3e500987575a14fc92c49f42c',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy/credentialStatus?contractAddress=11155420:0x9a1A258702050BcFB938Ad8Ec0996503473216d1&state=a1abdb9f44c7b649eb4d21b59ef34bd38e054aa3e500987575a14fc92c49f42c',
         type: CredentialStatusType.Iden3OnchainSparseMerkleTreeProof2023,
         revocationNonce: 100
       },
       output: {
-        contractAddress: '0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
-        chainId: 80002,
+        contractAddress: '0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
+        chainId: 11155420,
         revocationNonce: 100,
         stateHex: 'a1abdb9f44c7b649eb4d21b59ef34bd38e054aa3e500987575a14fc92c49f42c'
       }
@@ -114,7 +114,7 @@ describe('parse credential status with type Iden3OnchainSparseMerkleTreeProof202
     {
       name: 'invalid contract address format',
       input: {
-        id: 'did:polygonid:polygon:amoy:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/credentialStatus?revocationNonce=1234&contractAddress=0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy/credentialStatus?revocationNonce=1234&contractAddress=0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
         type: CredentialStatusType.Iden3OnchainSparseMerkleTreeProof2023,
         revocationNonce: 4321
       },
@@ -123,7 +123,7 @@ describe('parse credential status with type Iden3OnchainSparseMerkleTreeProof202
     {
       name: 'revocationNonce is empty',
       input: {
-        id: 'did:polygonid:polygon:amoy:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/credentialStatus?contractAddress=80002:0x2fCE183c7Fbc4EbB5DB3B0F5a63e0e02AE9a85d2',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy/credentialStatus?contractAddress=11155420:0x9a1A258702050BcFB938Ad8Ec0996503473216d1',
         type: CredentialStatusType.Iden3OnchainSparseMerkleTreeProof2023,
         revocationNonce: undefined
       },
@@ -132,7 +132,7 @@ describe('parse credential status with type Iden3OnchainSparseMerkleTreeProof202
     {
       name: 'contractAddress is required parameter',
       input: {
-        id: 'did:polygonid:polygon:amoy:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/credentialStatus',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy/credentialStatus',
         type: CredentialStatusType.Iden3OnchainSparseMerkleTreeProof2023,
         revocationNonce: 1234
       },
@@ -196,7 +196,7 @@ describe('onchain revocation checks', () => {
     const ethStorage = new EthStateStorage({
       ...defaultEthConnectionConfig,
       contractAddress: STATE_CONTRACT,
-      chainId: 80002,
+      chainId: 11155420,
       url: RPC_URL
     });
 
@@ -215,7 +215,7 @@ describe('onchain revocation checks', () => {
         ...defaultEthConnectionConfig,
         url: RPC_URL,
         contractAddress: STATE_CONTRACT,
-        chainId: 80002
+        chainId: 11155420
       }
     ]);
 

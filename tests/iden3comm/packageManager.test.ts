@@ -50,10 +50,10 @@ describe('tests packageManager with ZKP Packer', () => {
 
     pm.registerPackers([p]);
 
-    const identifier = 'did:iden3:polygon:mumbai:x4jcHP4XHTK3vX58AHZPyHE8kYjneyE6FZRfz7K29';
+    const identifier = 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy';
     const senderDID = DID.parse(identifier);
 
-    const targetIdentifier = 'did:iden3:polygon:mumbai:wzWeGdtjvKtUP1oTxQP5t5iZGDX3HNfEU5xR8MZAt';
+    const targetIdentifier = 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy';
     const targetID = DID.parse(targetIdentifier);
 
     const msgBytes = byteEncoder.encode(

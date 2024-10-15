@@ -341,7 +341,7 @@ describe('mtp proofs', () => {
         }
       }
     };
-    const sender = 'did:iden3:polygon:amoy:x7Z95VkUuyo6mqraJw2VGwCfqTzdqhM1RVjRHzcpK';
+    const sender = 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy';
     await expect(
       proofService.verifyZKPResponse(response, { query, sender, opts: TEST_VERIFICATION_OPTS })
     ).to.be.rejectedWith('issuer state is outdated');

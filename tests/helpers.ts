@@ -1,4 +1,3 @@
-import { Blockchain, DidMethod, NetworkId } from '@iden3/js-iden3-core';
 import {
   AuthDataPrepareFunc,
   BjjProvider,
@@ -32,7 +31,10 @@ import {
   W3CCredential,
   ZKPPacker,
   byteEncoder,
-  VerifyOpts
+  VerifyOpts,
+  OPID_METHOD,
+  OPID_BLOCKCHAIN,
+  OPID_NETWORK_SEPOLIA
 } from '../src';
 import { proving } from '@iden3/js-jwz';
 import { JsonRpcProvider } from 'ethers';
@@ -51,9 +53,9 @@ export const createIdentity = async (
   opts?: Partial<IdentityCreationOptions>
 ) => {
   return await wallet.createIdentity({
-    method: DidMethod.Iden3,
-    blockchain: Blockchain.Polygon,
-    networkId: NetworkId.Amoy,
+    method: OPID_METHOD,
+    blockchain: OPID_BLOCKCHAIN,
+    networkId: OPID_NETWORK_SEPOLIA,
     seed: SEED_ISSUER,
     revocationOpts: {
       type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,
@@ -68,9 +70,9 @@ export const createEthereumBasedIdentity = async (
   opts?: Partial<EthereumBasedIdentityCreationOptions>
 ) => {
   return await wallet.createEthereumBasedIdentity({
-    method: DidMethod.Iden3,
-    blockchain: Blockchain.Polygon,
-    networkId: NetworkId.Amoy,
+    method: OPID_METHOD,
+    blockchain: OPID_BLOCKCHAIN,
+    networkId: OPID_NETWORK_SEPOLIA,
     seed: SEED_ISSUER,
     revocationOpts: {
       type: CredentialStatusType.Iden3ReverseSparseMerkleTreeProof,

@@ -125,7 +125,7 @@ export const credWithRefreshService = createTestCredential({
   issuer: 'issuer1',
   credentialSubject: {
     birthday: 20000101,
-    id: 'did:iden3:polygon:mumbai:wzokvZ6kMoocKJuSbftdZxTD6qvayGpJb3m4FVXth'
+    id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy'
   },
   expirationDate: '2023-11-11',
   issuanceDate: '2022-11-11',
@@ -146,7 +146,7 @@ export const MockedLegacyCredential = {
   expirationDate: '2058-07-10T11:33:20.000Z',
   issuanceDate: '2023-10-24T14:45:32.612Z',
   credentialSubject: {
-    id: 'did:iden3:polygon:mumbai:wzokvZ6kMoocKJuSbftdZxTD6qvayGpJb3m4FVXth',
+    id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy',
     birthday: 19960424,
     documentType: 99,
     type: 'KYCAgeCredential'
@@ -156,7 +156,7 @@ export const MockedLegacyCredential = {
     type: 'Iden3ReverseSparseMerkleTreeProof',
     revocationNonce: 1000
   },
-  issuer: 'did:iden3:polygon:mumbai:x6uJbiuBA6RHL6NTRwBnoebvaFrNKYYHKoBF1kxZU',
+  issuer: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy',
   credentialSchema: {
     id: 'https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/kyc-nonmerklized.json',
     type: 'JsonSchema2023'
@@ -165,7 +165,7 @@ export const MockedLegacyCredential = {
     {
       type: 'BJJSignature2021',
       issuerData: {
-        id: 'did:iden3:polygon:mumbai:x6uJbiuBA6RHL6NTRwBnoebvaFrNKYYHKoBF1kxZU',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy',
         state: {
           rootOfRoots: '0000000000000000000000000000000000000000000000000000000000000000',
           revocationTreeRoot: '0000000000000000000000000000000000000000000000000000000000000000',
@@ -225,7 +225,7 @@ export const MockedLegacyCredential = {
     {
       type: 'Iden3SparseMerkleTreeProof',
       issuerData: {
-        id: 'did:iden3:polygon:mumbai:x6uJbiuBA6RHL6NTRwBnoebvaFrNKYYHKoBF1kxZU',
+        id: 'did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy',
         state: {
           claimsTreeRoot: '6f9842f1e295c1ce6f28c2c4645eb8268c7e335390fe3dd2997d6fb391aa9d2c',
           revocationTreeRoot: '0000000000000000000000000000000000000000000000000000000000000000',

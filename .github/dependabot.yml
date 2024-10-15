@@ -7,5 +7,4 @@ updates:
     allow:
       - dependency-name: "@iden3*"
     reviewers:
-      - "Kolezhniuk"
-      - "vmidyllic"
+      - "FacuDeLorenzo"

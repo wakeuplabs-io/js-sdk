@@ -47,7 +47,7 @@ export default [
       ...config.output,
       format: 'iife',
       file: packageJson.exports['.'].umd,
-      name: 'PolygonIdSdk'
+      name: 'OpIdSdk'
     }
   }
 ];

@@ -46,7 +46,7 @@ class LocalStorageMock {
 
 const mockedProof = new Iden3SparseMerkleTreeProof({
   issuerData: {
-    id: DID.parse('did:polygonid:polygon:mumbai:2qKCnKB6smYGToFJLbjQ2kajWqVxXHJCaJ97vVCiPv'),
+    id: DID.parse('did:opid:optimism:sepolia:46xjJV8kjidpy7Kb9BWzU3zwgqXLhJ4bsyVPyiLGyy'),
     state: {
       value: ZERO_HASH,
       claimsTreeRoot: ZERO_HASH,
