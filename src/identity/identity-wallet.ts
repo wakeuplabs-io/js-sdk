@@ -750,9 +750,9 @@ export class IdentityWallet implements IIdentityWallet {
     const currentState = ZERO_HASH; // In Ethereum identities we don't have an initial state with the auth credential
 
     const didType = buildDIDType(
-      opts.method || DidMethod.Iden3,
-      opts.blockchain || Blockchain.Polygon,
-      opts.networkId || NetworkId.Amoy
+      opts.method || OPID_METHOD,
+      opts.blockchain || OPID_BLOCKCHAIN,
+      opts.networkId || OPID_NETWORK_SEPOLIA
     );
 
     const keyIdEth = await this._kms.createKeyFromSeed(KmsKeyType.Secp256k1, opts.seed);

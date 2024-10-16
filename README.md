@@ -61,11 +61,9 @@ Please see [examples](https://github.com/wakeuplabs-io/privadoid-js-sdk-examples
         npm run doc:watch:website
     ```
 
-Documentation can be found [here](https://0xpolygonid.github.io/js-sdk-tutorials/)
-
 ## License
 
-js-sdk is part of the 0xPolygonID project copyright 2024 ZKID Labs AG
+opid-sdk is developed on top of PrivadoIDs js-sdk, project copyright 2024 ZKID Labs AG
 
 This project is licensed under either of
 

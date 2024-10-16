@@ -23,6 +23,7 @@ import {
 import { Hex, poseidon, PrivateKey, Signature } from '@iden3/js-crypto';
 import { TreeState } from '../../src/circuits';
 import { Merklizer } from '@iden3/js-jsonld-merklization';
+import { OPID_BLOCKCHAIN, OPID_METHOD, OPID_NETWORK_SEPOLIA } from '../../src';
 
 const TestClaimDocument = `{
   "@context": [
@@ -168,7 +169,7 @@ export async function generate(privKeyHex: string): Promise<{
   const state = poseidon.hash([ctr.bigInt(), BigInt(0), BigInt(0)]);
   // create new identity
   const identity = Id.idGenesisFromIdenState(
-    buildDIDType(DidMethod.Iden3, Blockchain.Polygon, NetworkId.Amoy),
+    buildDIDType(OPID_METHOD, OPID_BLOCKCHAIN, OPID_NETWORK_SEPOLIA),
     state
   );
 
